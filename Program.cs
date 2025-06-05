@@ -9,42 +9,40 @@ namespace prac46
 {
     enum Operation
     {
-        Add, Subtract, Multiply, Divide
+        Администратор, Модератор, Пользователь, Гость
     }
     internal class Program
     {
-        double Calculate(double a, double b, Operation operation)
-        {
-            switch (operation)
-            {
-                case Operation.Add:
-                    return a + b;
-                case Operation.Subtract:
-                    return a - b;
-                case Operation.Multiply:
-                    return a * b;
-                case Operation.Divide:
-                    if (b == 0)
-                        throw new DivideByZeroException("Нельзя делить на ноль");
-                    return a / b;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(operation), "Invalid operation.");
-            }
-        }
         static void Main(string[] args)
         {
-            Console.WriteLine("Введите первое число:");
-            double firstNumber = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine("Введите второе число:");
-            double secondNumber = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine("Выберите операцию (Add, Subtract, Multiply, Divide):");
-            string operationInput = Console.ReadLine();
-            Operation operation;
-            operation = (Operation)Enum.Parse(typeof(Operation), operationInput, true);
-            Program program = new Program();
-            double result;
-            result = program.Calculate(firstNumber, secondNumber, operation);
-            Console.WriteLine("Ответ: " + result);
+            Console.WriteLine("Введите вашу роль (Администратор, Модератор, Пользователь, Гость):");
+            string input = Console.ReadLine();
+            Operation userRole;
+            if (Enum.TryParse(input, out userRole))
+            {
+                switch (userRole)
+                {
+                    case Operation.Администратор:
+                        Console.WriteLine("Вы администратор");
+                        break;
+                    case Operation.Модератор:
+                        Console.WriteLine("Вы модератор");
+                        break;
+                    case Operation.Пользователь:
+                        Console.WriteLine("Вы пользователь");
+                        break;
+                    case Operation.Гость:
+                        Console.WriteLine("Вы гость");
+                        break;
+                    default:
+                        Console.WriteLine("Неизвестная роль");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Неизвестная роль");
+            }
         }
     }
 }
