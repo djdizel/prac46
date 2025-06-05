@@ -7,19 +7,44 @@ using System.Threading.Tasks;
 
 namespace prac46
 {
+    enum Operation
+    {
+        Add, Subtract, Multiply, Divide
+    }
     internal class Program
     {
-        enum Days
+        double Calculate(double a, double b, Operation operation)
         {
-            Sat,Sun,Mon,Tue,Wed,Thu,Fri
+            switch (operation)
+            {
+                case Operation.Add:
+                    return a + b;
+                case Operation.Subtract:
+                    return a - b;
+                case Operation.Multiply:
+                    return a * b;
+                case Operation.Divide:
+                    if (b == 0)
+                        throw new DivideByZeroException("Нельзя делить на ноль");
+                    return a / b;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(operation), "Invalid operation.");
+            }
         }
         static void Main(string[] args)
         {
-            Days i;
-            for (i = Days.Sat; i <= Days.Fri; i++)
-            {
-                Console.WriteLine(i + " имеет значение " + (int)i);
-            }
+            Console.WriteLine("Введите первое число:");
+            double firstNumber = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Введите второе число:");
+            double secondNumber = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Выберите операцию (Add, Subtract, Multiply, Divide):");
+            string operationInput = Console.ReadLine();
+            Operation operation;
+            operation = (Operation)Enum.Parse(typeof(Operation), operationInput, true);
+            Program program = new Program();
+            double result;
+            result = program.Calculate(firstNumber, secondNumber, operation);
+            Console.WriteLine("Ответ: " + result);
         }
     }
 }
