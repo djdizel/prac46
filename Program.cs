@@ -9,32 +9,16 @@ namespace prac46
 {
     internal class Program
     {
-        enum Months
+        enum Days
         {
-            Январь,
-            Февраль,
-            Март,
-            Апрель,
-            Май,
-            Июнь,
-            Июль,
-            Август,
-            Сентябрь,
-            Октябрь,
-            Ноябрь,
-            Декабрь
+            Sat,Sun,Mon,Tue,Wed,Thu, Fri
         }
         static void Main(string[] args)
         {
-            //int count = -1;
-            //foreach (var month in Enum.GetValues(typeof(Months)))
-            //{
-            //    count++;
-            //    Console.WriteLine($"{count}\t{month.ToString()}");
-            //}
-            for(int i = 0; i < Enum.GetNames(typeof(Months)).Length; i++)
+            Days i;
+            for (i = Days.Sat; i <= Days.Fri; i++)
             {
-                Console.WriteLine($"{i}\t{Enum.GetName(typeof(Months), i)}");
+                Console.WriteLine(i + " имеет значение " + (int)i);
             }
         }
     }
