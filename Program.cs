@@ -7,42 +7,32 @@ using System.Threading.Tasks;
 
 namespace prac46
 {
-    enum Operation
+    enum Post
     {
-        Администратор, Модератор, Пользователь, Гость
+        CEO,Manager,Worker
     }
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Введите вашу роль (Администратор, Модератор, Пользователь, Гость):");
+        Console.WriteLine("Введите должность работника (CEO, Manager, Worker):");
             string input = Console.ReadLine();
-            Operation userRole;
-            if (Enum.TryParse(input, out userRole))
+            Post workerPost;
+            if (!Enum.TryParse(input, true, out workerPost))
             {
-                switch (userRole)
-                {
-                    case Operation.Администратор:
-                        Console.WriteLine("Вы администратор");
-                        break;
-                    case Operation.Модератор:
-                        Console.WriteLine("Вы модератор");
-                        break;
-                    case Operation.Пользователь:
-                        Console.WriteLine("Вы пользователь");
-                        break;
-                    case Operation.Гость:
-                        Console.WriteLine("Вы гость");
-                        break;
-                    default:
-                        Console.WriteLine("Неизвестная роль");
-                        break;
-                }
+                Console.WriteLine("Некорректная должность.");
+                return;
             }
-            else
+            Console.WriteLine("Введите количество отработанных часов:");
+            int hours;
+            if (!int.TryParse(Console.ReadLine(), out hours) || hours < 0)
             {
-                Console.WriteLine("Неизвестная роль");
+                Console.WriteLine("Некорректное количество часов.");
+                return;
             }
+            Accauntant accauntant = new Accauntant();
+            accauntant.AskForBonus(workerPost, hours);
+
         }
     }
 }
