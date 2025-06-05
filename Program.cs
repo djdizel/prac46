@@ -11,7 +11,7 @@ namespace prac46
     {
         enum Days
         {
-            Sat,Sun,Mon,Tue,Wed,Thu, Fri
+            Sat,Sun,Mon,Tue,Wed,Thu,Fri
         }
         static void Main(string[] args)
         {
